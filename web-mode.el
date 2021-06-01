@@ -5043,8 +5043,6 @@ Also return non-nil if it is the command `self-insert-command' is remapped to."
 
        ((string= web-mode-engine "elixir")
         (cond
-         ((web-mode-block-starts-with "f = form_for" reg-beg)
-          (setq controls (append controls (list (cons 'open "form-ctrl")))))
          ((web-mode-block-starts-with "end" reg-beg)
           (setq controls (append controls (list (cons 'close "ctrl")))))
          ((web-mode-block-starts-with "else" reg-beg)
@@ -5054,8 +5052,11 @@ Also return non-nil if it is the command `self-insert-command' is remapped to."
          ((and (web-mode-block-ends-with " ->" reg-beg) (web-mode-block-starts-with "form_for" reg-beg))
           (setq controls (append controls (list (cons 'open "ctrl")))))
          ((web-mode-block-ends-with " ->" reg-beg)
-          (setq controls (append controls (list (cons 'close "case-ctrl")) (list (cons 'open "case-ctrl"))))
-          )
+          (setq controls (append controls (list (cons 'close "case-ctrl")) (list (cons 'open "case-ctrl")))))
+         ((web-mode-block-starts-with "f = form_for" reg-beg)
+          (setq controls (append controls (list (cons 'open "form-ctrl")))))
+         ((web-mode-block-starts-with "form_for" reg-beg)
+          (setq controls (append controls (list (cons 'open "form-ctrl")))))
          )
         ) ;elixir
 
